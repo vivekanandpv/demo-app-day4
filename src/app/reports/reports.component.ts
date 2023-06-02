@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Deactivatable } from '../deactivatable';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
 })
-export class ReportsComponent implements OnInit {
+export class ReportsComponent implements OnInit, Deactivatable {
   constructor(private ar: ActivatedRoute, private router: Router) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     console.log('state', state);
+  }
+
+  isDeactivatable() {
+    console.log('isDeactivatable');
+    return confirm('Do you want to exit?');
   }
 
   ngOnInit(): void {
